@@ -20,6 +20,17 @@
         .ghost-hover:hover { opacity: 0.7; transition: all 0.3s ease; }
         .cyber-border { border: 1px solid rgba(0, 255, 255, 0.3); }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .blinking-cursor::after {
+    content: "█";
+    animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
     </style>
 </head>
 <body class="bg-black text-purple-400 font-tech overflow-x-hidden">
@@ -62,8 +73,7 @@
         <section class="flex-grow flex flex-col justify-center px-4 sm:px-8 lg:px-12 py-12 sm:py-24">
             <div class="max-w-4xl mx-auto" data-aos="fade-up">
                 <div class="terminal-line pl-4 mb-8">
-                    <h2 class="text-3xl sm:text-5xl font-bold mb-4 glow-text">>_ CYBER SECURITY SPECIALIST</h2>
-                    <p class="text-lg sm:text-xl text-cyan-300 font-space">// Ghost in the machine. Securing digital realms with ethereal precision.</p>
+              <div id="terminal-typewriter" class="text-2xl sm:text-4xl font-bold glow-text whitespace-pre-line font-space text-cyan-300 blinking-cursor"></div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
                     <div class="bg-black bg-opacity-50 p-6 cyber-border glow-box hover:bg-opacity-70 transition-all">
@@ -268,8 +278,23 @@
 
         // Feather icons
         feather.replace();
+// Terminal Typewriter Effect
+const terminalText = ">_ CYBER SECURITY SPECIALIST\n// Ghost in the machine. Securing digital realms with ethereal precision.";
+let charIndex = 0;
+const speed = 40;
+
+function typeWriter() {
+    if (charIndex < terminalText.length) {
+        document.getElementById("terminal-typewriter").innerHTML += terminalText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, speed);
+    }
+}
+typeWriter();
+
     </script>
 </body>
 
 </html>
+
 
